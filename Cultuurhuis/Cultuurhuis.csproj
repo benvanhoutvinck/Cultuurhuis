@@ -215,6 +215,8 @@
     <Compile Include="Models\Klant.cs">
       <DependentUpon>CultuurHuisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\KlantProperties.cs" />
+    <Compile Include="Models\KlantUitbreiding.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Reservatie.cs">
       <DependentUpon>CultuurHuisModel.tt</DependentUpon>
