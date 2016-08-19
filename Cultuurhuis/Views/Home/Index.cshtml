@@ -1,0 +1,83 @@
+﻿@model Cultuurhuis.Models.GenreViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Het Cultuurhuis</h1>
+        </div>
+        <div class="col-md-3">
+            <img src="~/Images/voorstellingen.png" alt="logo" />
+        </div>
+    </div>
+</div>
+
+@if (Model.Voorstellingen == null)
+{
+    <div class="alert alert-info" role="alert">Kies een voorstellingsgenre</div>
+}
+
+<div class="navbar" role="navigation">
+    <ul class="nav nav-pills">
+        @foreach (var item in Model.Genres)
+        {
+            if (item.GenreId == Model.SelectedGenreId)
+            {
+                <li role="presentation" class="active">@Html.ActionLink(item.Naam, "SelectGenre", "Home", new { selectedGenreId = item.GenreId }, null)</li>
+            }
+            else
+            {
+                <li role="presentation">@Html.ActionLink(item.Naam, "SelectGenre", "Home", new { selectedGenreId = item.GenreId }, null)</li>
+            }
+        }
+    </ul>
+</div>
+@if (Model.Voorstellingen != null)
+{
+
+    if (Model.Voorstellingen.Count == 0)
+    {
+        <div class="alert alert-warning" role="alert">Er zijn geen voorstellingen van dit genre beschikbaar.</div>
+    }
+    else
+    {
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Titel</th>
+                    <th>uitvoerders</th>
+                    <th>Prijs</th>
+                    <th>Vrije plaatsen</th>
+                    <th>Reserveren</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Voorstellingen)
+                {
+                    <tr>
+                        <td>@item.Datum</td>
+                        <td>@item.Titel</td>
+                        <td>@item.Uitvoerders</td>
+                        <td>@item.Prijs</td>
+
+                        <td>@item.VrijePlaatsen</td>
+                        @if (item.VrijePlaatsen > 0)
+                        {
+                            <td>@Html.ActionLink("Reserveren", "Reserveren", "Reservering", new { id = item.VoorstellingId }, null)</td>
+                        }
+                        else
+                        {
+                            <td><span class="label label-danger">Uitverkocht</span></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+

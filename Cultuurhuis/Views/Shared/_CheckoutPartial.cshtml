@@ -1,0 +1,8 @@
+﻿<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a href="~/Reservering/Overzicht"><span class="glyphicon glyphicon-euro" aria-hidden="false"></span></a>
+    </li>
+    <li>
+        <a href="~/Reservering/Overzicht"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="false"></span><span class="badge">@{ List<Cultuurhuis.Models.ReserveringForm> reservaties = (List<Cultuurhuis.Models.ReserveringForm>)Session["Reservaties"]; @reservaties.Count();}</span></a>
+    </li>
+</ul>

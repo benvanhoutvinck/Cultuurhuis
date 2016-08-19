@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Cultuurhuis.Models.ReserveringForm>
+@{
+    ViewBag.Title = "Overzicht";
+}
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Het Cultuurhuis</h1>
+        </div>
+        <div class="col-md-3">
+            <img src="~/Images/mandje.png" alt="winkelmandje" />
+        </div>
+    </div>
+    <div class="btn-group">
+        <a href="~/Home/Index" class="btn btn-primary btn-lg">
+            Tickets kiezen
+
+        </a>
+    </div>
+    <div class="btn-group">
+        <a href="~/Kassa/Identificatie" class="btn btn-primary btn-lg">
+            Kassa
+            &raquo;
+        </a>
+    </div>
+</div>
+
+@if (@Model == null)
+{
+    <div class="alert alert-info" role="alert">Uw winkelmandje is momenteel leeg!</div>
+}
+else
+{
+    <div class="clearfix">
+        <div class="alert alert-info" role="alert">Inhoud van uw winkelmandje</div>
+
+        @using (Html.BeginForm("Verwijderen", "Reservering"))
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Titel</th>
+                        <th>uitvoerders</th>
+                        <th>Prijs</th>
+                        <th>Plaatsen</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @Html.EditorForModel()
+
+
+                </tbody>
+            </table>
+            <input class="btn btn-default pull-right" type="submit" value="Verwijderen" />
+        }
+    </div>
+    <div class="alert alert-info" role="alert">Te betalen: € @ViewBag.totaal</div>
+
+
+}

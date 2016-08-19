@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Overzicht";
+}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Het Cultuurhuis</h1>
+        </div>
+        <div class="col-md-3">
+            <img src="~/Images/mandje.png" alt="winkelmandje" />
+        </div>
+    </div>
+    <div class="btn-group">
+        <a href="~/Home/Index" class="btn btn-primary btn-lg">
+            Tickets kiezen
+        </a>
+    </div>
+</div>
+
+@foreach (var item in ViewBag.GelukteReservaties)
+{
+    <option>@item.Voorstelling.Titel</option>
+}
+
+

@@ -1,0 +1,85 @@
+﻿@model Cultuurhuis.Models.ReserveringForm
+@{
+    ViewBag.Title = "Reserveren";
+}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Het Cultuurhuis</h1>
+        </div>
+        <div class="col-md-3">
+            <img src="~/Images/reserveren.png" alt="logo" />
+        </div>
+    </div>
+    <p>
+        <a href="~/Home/Index" class="btn btn-primary btn-lg">
+            Tickets kiezen
+            &raquo;
+        </a>
+    </p>
+</div>
+
+<div class="alert alert-info" role="alert">Aantal tickest voor deze voorstelling</div>
+
+    <div>
+        @using (Html.BeginForm())
+        {
+
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Voorstelling.Titel)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Voorstelling.Titel)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Voorstelling.Uitvoerders)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Voorstelling.Uitvoerders)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Voorstelling.Datum)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Voorstelling.Datum)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Voorstelling.Prijs)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Voorstelling.Prijs)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Voorstelling.VrijePlaatsen)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Voorstelling.VrijePlaatsen)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Plaatsen)
+                </dt>
+
+                <dd>
+                    @Html.TextBoxFor(model => model.Plaatsen, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Plaatsen)
+                </dd>
+                <dt></dt>
+                <dd><input class="btn btn-default" type="submit" value="Reserveren" /></dd>
+                @Html.HiddenFor(model => model.VrijePlaatsen)
+
+            </dl>
+
+            @Html.ValidationSummary()
+        }
+    </div>

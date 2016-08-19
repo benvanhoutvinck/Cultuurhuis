@@ -1,0 +1,136 @@
+﻿@using Cultuurhuis.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Het Cultuurhuis</h1>
+        </div>
+        <div class="col-md-3">
+            <img src="~/Images/mandje.png" alt="winkelmandje" />
+        </div>
+    </div>
+    <div class="btn-group">
+        <a href="~/Home/Index" class="btn btn-primary btn-lg">
+            Tickets kiezen
+        </a>
+    </div>
+    <div class="btn-group">
+        <a href="~/Reservering/Overzicht" class="btn btn-primary btn-lg">
+            Winkelmandje
+            &raquo;
+        </a>
+    </div>
+</div>
+<h2>Stap 1: Wie ben je?</h2>
+    <section id="loginForm">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @if (Request.IsAuthenticated)
+                    {
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", disabled = "disabled" });
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", });
+                    }
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @if (Request.IsAuthenticated)
+                    {
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", disabled = "disabled" })
+                    }
+                    else
+                    {
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    }
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="checkbox">
+                        @if (Request.IsAuthenticated)
+                        {
+                            @Html.CheckBoxFor(m => m.RememberMe, new { disabled = "disabled" })
+                        }
+                        else
+                        {
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                        }
+                        @Html.LabelFor(m => m.RememberMe)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-12">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <input type="submit" value="Zoek me op" class="btn btn-default" disabled="disabled" />
+                        <div class="btn btn-default disabled">Ik ben nieuw</div>
+                    }
+                    else
+                    {
+                        <input type="submit" value="Zoek me op" class="btn btn-default" />
+                        <a href="~/Account/Register" class="btn btn-default">
+                            Ik ben nieuw
+                        </a>
+                    }
+
+                </div>
+
+            </div>
+            @* Enable this once you have account confirmation enabled for password reset functionality
+                <p>
+                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                </p>*@
+        }
+    </section>
+    @if (ViewData.ModelState.IsValid)
+    {
+        Klant klant = (Klant)HttpContext.Current.Session["klant"];
+
+        if (klant != null)
+        {
+            <div class="alert alert-success" role="alert">@klant.Voornaam @klant.Familienaam @klant.Straat @klant.HuisNr @klant.Postcode @klant.Gemeente</div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">Verkeerde gebruikersnaam of wachtwoord</div>
+    }
+    <section>
+        <h2>Stap 2: Bevestigen</h2>
+@if (Request.IsAuthenticated) { 
+        @Html.ActionLink("Bevestigen", "LoginBevestigen", "Account", new { returnUrl = ViewBag.ReturnUrl }, new { @class = "btn btn-default" })
+}
+else
+{
+    @Html.ActionLink("Bevestigen", "LoginBevestigen", "Account", new { returnUrl = ViewBag.ReturnUrl }, new { @class = "btn btn-default", disabled="disabled" })
+}
+
+    </section>
+
+    @*
+        <div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>
+    *@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

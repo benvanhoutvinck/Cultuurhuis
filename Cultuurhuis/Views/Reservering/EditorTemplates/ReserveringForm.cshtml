@@ -1,0 +1,15 @@
+﻿@model Cultuurhuis.Models.ReserveringForm
+@{
+    ViewBag.Title = "ReserveringForm";
+}
+
+<tr>
+    <td>@Html.DisplayFor(m => m.Voorstelling.Datum)</td>
+    <td>@Html.DisplayFor(m => m.Voorstelling.Titel)</td>
+    <td>@Html.DisplayFor(m => m.Voorstelling.Uitvoerders)</td>
+    <td>@Html.DisplayFor(m => m.Voorstelling.Prijs)</td>
+    <td>@Html.DisplayFor(m => m.Plaatsen)</td>
+    <td>@Html.CheckBoxFor(m => m.Verwijder)</td>
+    @Html.HiddenFor(m => m.Voorstelling.VoorstellingId)
+</tr>
+
