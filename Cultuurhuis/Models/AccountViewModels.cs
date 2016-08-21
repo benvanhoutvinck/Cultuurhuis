@@ -83,6 +83,7 @@ namespace Cultuurhuis.Models
         public string Gemeente { get; set; }
 
         [Required]
+        [Gebruikersnaam(ErrorMessage = "Een klant met deze gebruikersnaam komt al voor in de database. Kies een andere naam.")]
         public string Gebruikersnaam { get; set; }
 
         [Required]

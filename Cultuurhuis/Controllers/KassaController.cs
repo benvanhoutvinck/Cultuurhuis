@@ -8,6 +8,7 @@ using System.Transactions;
 
 namespace Cultuurhuis.Controllers
 {
+    [Authorize]
     public class KassaController : Controller
     {
         // GET: Kassa
@@ -16,10 +17,10 @@ namespace Cultuurhuis.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Identificatie()
         {
-            this.Session["Bestellen"] = true;
-            //return Redirect("~/Account/Login");
+           
             return RedirectToAction("Login", "Account", new { returnUrl = "~/Kassa/OVerzicht" });
 
         }

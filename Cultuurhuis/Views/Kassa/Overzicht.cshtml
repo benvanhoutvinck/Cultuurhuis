@@ -19,9 +19,60 @@
     </div>
 </div>
 
-@foreach (var item in ViewBag.GelukteReservaties)
-{
-    <option>@item.Voorstelling.Titel</option>
-}
+<div class="alert alert-success" role="alert">Gelukte reserveringen</div>
 
+<!-- Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Titel</th>
+            <th>uitvoerders</th>
+            <th>Prijs</th>
+            <th>Plaatsen</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.GelukteReservaties)
+        {
+            <tr>
+                <td>@item.Voorstelling.Datum</td>
+                <td>@item.Voorstelling.Titel</td>
+                <td>@item.Voorstelling.Uitvoerders</td>
+                <td>@item.Voorstelling.Prijs</td>
 
+                <td>@item.Plaatsen</td>
+              
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="alert alert-danger" role="alert">Mislukte Reservaties</div>
+
+<!-- Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Titel</th>
+            <th>uitvoerders</th>
+            <th>Prijs</th>
+            <th>Plaatsen</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.MislukteReservaties)
+        {
+            <tr>
+                <td>@item.Voorstelling.Datum</td>
+                <td>@item.Voorstelling.Titel</td>
+                <td>@item.Voorstelling.Uitvoerders</td>
+                <td>@item.Voorstelling.Prijs</td>
+
+                <td>@item.Plaatsen</td>
+
+            </tr>
+        }
+    </tbody>
+</table>

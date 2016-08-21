@@ -60,6 +60,10 @@ namespace Cultuurhuis.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.GetUserId() != null)
+            {
+                this.Session["klant"] = db.getKlantByUserid(User.Identity.GetUserId());
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -83,7 +87,7 @@ namespace Cultuurhuis.Controllers
             {
                 case SignInStatus.Success:
                     ApplicationUser user = UserManager.FindByName(model.Email);
-                    string UserId = user.Id;
+                    string UserId = user.Id;  
                     this.Session["klant"] = db.getKlantByUserid(UserId);
                     ViewBag.ReturnUrl = returnUrl;
                     return RedirectToAction("Login", new {ReturnUrl = returnUrl});

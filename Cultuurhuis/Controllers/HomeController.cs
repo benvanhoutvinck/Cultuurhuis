@@ -13,6 +13,8 @@ namespace Cultuurhuis.Controllers
     public class HomeController : Controller
     {
         private EntitiesDbContext db = new EntitiesDbContext();
+
+        [AllowAnonymous]
         public ActionResult Index()
         {
             GenreViewModel vm = new GenreViewModel();
@@ -22,19 +24,21 @@ namespace Cultuurhuis.Controllers
             return View(vm);
         }
 
+        [AllowAnonymous]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-
+        [AllowAnonymous]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
+        [AllowAnonymous]
         public ActionResult SelectGenre(int? selectedGenreId)
         {
             if (selectedGenreId == null)

@@ -29,7 +29,6 @@ namespace Cultuurhuis.Models
         public string GebruikersNaam { get; set; }
         public string User_id { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual ICollection<Reservatie> Reservaties { get; set; }
     }
 }

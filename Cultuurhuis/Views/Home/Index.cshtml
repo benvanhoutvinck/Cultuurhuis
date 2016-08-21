@@ -43,40 +43,42 @@
     }
     else
     {
-        <!-- Table -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Datum</th>
-                    <th>Titel</th>
-                    <th>uitvoerders</th>
-                    <th>Prijs</th>
-                    <th>Vrije plaatsen</th>
-                    <th>Reserveren</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Voorstellingen)
-                {
+        <div class="table-responsive">
+            <!-- Table -->
+            <table class="table table-sm table-striped">
+                <thead>
                     <tr>
-                        <td>@item.Datum</td>
-                        <td>@item.Titel</td>
-                        <td>@item.Uitvoerders</td>
-                        <td>@item.Prijs</td>
-
-                        <td>@item.VrijePlaatsen</td>
-                        @if (item.VrijePlaatsen > 0)
-                        {
-                            <td>@Html.ActionLink("Reserveren", "Reserveren", "Reservering", new { id = item.VoorstellingId }, null)</td>
-                        }
-                        else
-                        {
-                            <td><span class="label label-danger">Uitverkocht</span></td>
-                        }
+                        <th>Datum</th>
+                        <th>Titel</th>
+                        <th>uitvoerders</th>
+                        <th>Prijs</th>
+                        <th>Vrije plaatsen</th>
+                        <th>Reserveren</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Voorstellingen)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.Datum)</td>
+                            <td>@item.Titel</td>
+                            <td>@item.Uitvoerders</td>
+                            <td>@Html.DisplayFor(m => item.Prijs)</td>
+
+                            <td>@item.VrijePlaatsen</td>
+                            @if (item.VrijePlaatsen > 0)
+                        {
+                                <td>@Html.ActionLink("Reserveren", "Reserveren", "Reservering", new { id = item.VoorstellingId }, null)</td>
+                            }
+                            else
+                            {
+                                <td><span class="label label-danger">Uitverkocht</span></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 }
 
